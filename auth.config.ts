@@ -11,7 +11,9 @@ export const authConfig = {
       console.log("isLoggedIn", isLoggedIn);
       // Initialize protected routes
       // Here, all routes except the login page is protected
-      const isOnProtected = !nextUrl.pathname.startsWith("/login");
+      const isOnProtected =
+        !nextUrl.pathname.startsWith("/login") &&
+        !nextUrl.pathname.startsWith("/signup");
 
       if (isOnProtected) {
         if (isLoggedIn) return true;
