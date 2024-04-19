@@ -9,7 +9,7 @@ interface MenuItemProps {
 }
 
 export const Menu = () => {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<string>("color");
 
   return (
     <div className="h-10 flex w-[640px] mt-6 justify-around items-center mx-auto gap-6">
