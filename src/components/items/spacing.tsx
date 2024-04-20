@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+"use client";
+
+import React from "react";
 import { Select } from "antd";
 import { VariantCount } from "./variantCount";
+import { useSpaceContext } from "@/lib/context/spaceContext";
 
 const { Option } = Select;
 
 export const SpacingComponent = () => {
-  const [spacing, setSpacing] = useState("6px");
+  const { spacing, setSpacing, variantCount, setVariantCount } =
+    useSpaceContext();
 
   const handleSpacingChange = (value: any) => {
     setSpacing(value);
+  };
+
+  const handleVariantCountChange = (value: number) => {
+    setVariantCount(value);
   };
 
   return (
@@ -33,8 +41,8 @@ export const SpacingComponent = () => {
         <h1 className="mt-10 mb-4 font-medium">Variant Count:</h1>
         <VariantCount
           id="variantCount"
-          defaultValue={10}
-          onChange={(value) => console.log(value)}
+          defaultValue={variantCount}
+          onChange={handleVariantCountChange}
         />
       </div>
       <div className="h-[800px] w-2/3 border rounded-[25px]"></div>
