@@ -21,6 +21,7 @@ interface SpaceContextType {
   setSpacing: (value: string) => void;
   setVariantCount: (value: number) => void;
   setSizes: (value: Size[]) => void;
+  deleteSize: (index: number) => void;
 }
 
 const SpaceContext = createContext<SpaceContextType | undefined>(undefined);
@@ -47,10 +48,42 @@ export const SpaceProvider: React.FC<PropsWithChildren<{}>> = ({
 
   const setVariantCount = (value: number) => {
     setVariantCountState(value);
+
+    if (value > sizes.length) {
+      const newSizes = [...sizes];
+      for (let i = sizes.length + 1; i <= value; i++) {
+        const sizeName = `${i}xl`;
+        newSizes.push({
+          sizeName: sizeName,
+          sizePx: "",
+          sizeRem: "",
+          isDeleted: false,
+        });
+      }
+      setSizesState(newSizes);
+    } else if (value < sizes.length) {
+      const newSizes = sizes.slice(0, value);
+      setSizesState(newSizes);
+    }
   };
 
   const setSizes = (value: Size[]) => {
     setSizesState(value);
+  };
+
+  const deleteSize = (index: number) => {
+    console.log("Before deletion - Sizes length:", sizes.length);
+    if (sizes.length > 8) {
+      const newSizes = sizes.filter((_, i) => i !== index);
+      console.log("After deletion - New sizes length:", newSizes.length);
+      setSizesState(newSizes);
+      if (newSizes.length >= 8) {
+        setVariantCountState(newSizes.length);
+        console.log("Decrementing variantCount", variantCount);
+      }
+    } else {
+      console.log("Deletion not allowed or no need to decrement variantCount");
+    }
   };
 
   const contextValue: SpaceContextType = {
@@ -60,6 +93,7 @@ export const SpaceProvider: React.FC<PropsWithChildren<{}>> = ({
     setSpacing,
     setVariantCount,
     setSizes,
+    deleteSize,
   };
 
   return (

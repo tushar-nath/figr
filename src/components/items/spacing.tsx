@@ -25,6 +25,7 @@ export const SpacingComponent = () => {
     setVariantCount,
     sizes,
     setSizes,
+    deleteSize,
   } = useSpaceContext();
 
   const handleSpacingChange = (value: any) => {
@@ -41,7 +42,7 @@ export const SpacingComponent = () => {
 
     if (field === "sizePx") {
       const pixelValue = value.endsWith("px") ? parseInt(value, 10) : 0;
-      const remValue = pixelValue / 16; 
+      const remValue = pixelValue / 16;
       newSizes[index] = {
         ...size,
         sizePx: value,
@@ -80,7 +81,7 @@ export const SpacingComponent = () => {
           onChange={handleVariantCountChange}
         />
       </div>
-      <div className="h-[800px] w-2/3 border rounded-[25px]">
+      <div className="h-[800px] w-2/3 border rounded-[25px] overflow-y-auto">
         <div className="py-10 px-6">
           <Table>
             <TableHeader>
@@ -114,7 +115,12 @@ export const SpacingComponent = () => {
                     <Input disabled value={size.sizeRem} />
                   </TableCell>
                   <TableCell className="text-right">
-                    <Trash2 />
+                    <Trash2
+                      onClick={() => deleteSize(index)}
+                      style={{
+                        cursor: sizes.length > 8 ? "pointer" : "not-allowed",
+                      }}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
