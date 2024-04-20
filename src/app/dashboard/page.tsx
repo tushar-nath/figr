@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Header } from "@/components/header/header";
 import { Menu } from "@/components/menu/menu";
 import { ColorComponent } from "@/components/items/color";
+import { SpacingComponent } from "@/components/items/spacing";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<string>("color");
@@ -12,6 +13,8 @@ export default function Home() {
     switch (selectedItem) {
       case "color":
         return <ColorComponent />;
+      case "spacing":
+        return <SpacingComponent />;
       default:
         return null;
     }
