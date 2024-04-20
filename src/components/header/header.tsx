@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,6 +11,19 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator"
+import { logout } from "@/lib/actions";
+
+const handleLogout = async () => {
+  try {
+    console.info(
+      "Invoking handleLogout from client. (src/app/Dashboard/page.tsx"
+    );
+    await logout();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const Header = () => {
   return (
@@ -36,7 +51,7 @@ export const Header = () => {
                   Profile
                   <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                   Log out
                   <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
@@ -45,7 +60,7 @@ export const Header = () => {
           </DropdownMenu>
         </div>
       </div>
-      <DropdownMenuSeparator />
+      <Separator className="my-4" />
     </div>
   );
 };
