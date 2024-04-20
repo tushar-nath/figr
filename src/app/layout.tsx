@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ColorProvider } from "@/lib/context/colorContext";
 import { SpaceProvider } from "@/lib/context/spaceContext";
+import { RadiusProvider } from "@/lib/context/radiusContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ColorProvider>
-          <SpaceProvider>{children}</SpaceProvider>
+          <SpaceProvider>
+            <RadiusProvider>{children}</RadiusProvider>
+          </SpaceProvider>
         </ColorProvider>
       </body>
     </html>
