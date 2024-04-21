@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Separator } from "../ui/separator";
 import ButtonsPreview from "../previews/buttonPreview";
 import { TextPreview } from "../previews/textPreview";
+import { RadioPreview } from "../previews/radioPreview";
 
 export const Components = () => {
   const [view, setView] = useState("button");
@@ -18,7 +19,7 @@ export const Components = () => {
     } else if (view === "text") {
       return <TextPreview />;
     } else if (view === "radio") {
-      return <div>Radio Component Preview</div>;
+      return <RadioPreview />;
     } else if (view === "checkbox") {
       return <div>Checkbox Component Preview</div>;
     } else if (view === "select") {
