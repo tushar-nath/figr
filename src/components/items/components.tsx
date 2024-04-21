@@ -6,6 +6,7 @@ import ButtonsPreview from "../previews/buttonPreview";
 import { TextPreview } from "../previews/textPreview";
 import { RadioPreview } from "../previews/radioPreview";
 import { CheckboxPreview } from "../previews/checkbox";
+import { SelectPreview } from "../previews/selectPreview";
 
 export const Components = () => {
   const [view, setView] = useState("button");
@@ -24,7 +25,7 @@ export const Components = () => {
     } else if (view === "checkbox") {
       return <CheckboxPreview />;
     } else if (view === "select") {
-      return <div>Select Component Preview</div>;
+      return <SelectPreview />;
     }
     return null; // Default case in case an unexpected value is set
   };

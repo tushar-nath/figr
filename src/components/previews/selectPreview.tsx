@@ -1,0 +1,40 @@
+import * as React from "react";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useColorContext } from "@/lib/context/colorContext";
+
+export const SelectPreview = () => {
+  const { hexCodes } = useColorContext();
+  const primaryColor = hexCodes[0];
+
+  return (
+    <div className="flex justify-center items-center h-full">
+      <Select>
+        <SelectTrigger
+          className="w-[180px]"
+          style={{ borderColor: primaryColor }}
+        >
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="blueberry">Blueberry</SelectItem>
+            <SelectItem value="grapes">Grapes</SelectItem>
+            <SelectItem value="pineapple">Pineapple</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};
