@@ -105,7 +105,7 @@ export const SpacingComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Input
-                      defaultValue={size.sizePx}
+                      value={size.sizePx} 
                       onChange={(e) =>
                         handleSizeChange(index, "sizePx", e.target.value)
                       }

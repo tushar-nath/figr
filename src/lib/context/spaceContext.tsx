@@ -32,18 +32,33 @@ export const SpaceProvider: React.FC<PropsWithChildren<{}>> = ({
   const [spacing, setSpacingState] = useState("6px");
   const [variantCount, setVariantCountState] = useState(8);
   const [sizes, setSizesState] = useState<Size[]>([
-    { sizeName: "xxxs", sizePx: "2px", sizeRem: "0.125rem", isDeleted: false },
-    { sizeName: "xxs", sizePx: "4px", sizeRem: "0.25rem", isDeleted: false },
-    { sizeName: "xs", sizePx: "6px", sizeRem: "0.375rem", isDeleted: false },
-    { sizeName: "sm", sizePx: "10px", sizeRem: "0.625rem", isDeleted: false },
-    { sizeName: "md", sizePx: "14px", sizeRem: "0.875rem", isDeleted: false },
-    { sizeName: "ml", sizePx: "20px", sizeRem: "1.25rem", isDeleted: false },
-    { sizeName: "lg", sizePx: "28px", sizeRem: "1.75rem", isDeleted: false },
-    { sizeName: "xl", sizePx: "40px", sizeRem: "2.5rem", isDeleted: false },
+    { sizeName: "xxxs", sizePx: "6px", sizeRem: "0.375rem", isDeleted: false },
+    { sizeName: "xxs", sizePx: "12x", sizeRem: "0.75rem", isDeleted: false },
+    { sizeName: "xs", sizePx: "18px", sizeRem: "1.125rem", isDeleted: false },
+    { sizeName: "sm", sizePx: "24px", sizeRem: "1.5rem", isDeleted: false },
+    { sizeName: "md", sizePx: "30px", sizeRem: "1.875rem", isDeleted: false },
+    { sizeName: "ml", sizePx: "36px", sizeRem: "2.25rem", isDeleted: false },
+    { sizeName: "lg", sizePx: "42px", sizeRem: "2.625rem", isDeleted: false },
+    { sizeName: "xl", sizePx: "48px", sizeRem: "3rem", isDeleted: false },
   ]);
 
+  const updateSizesBasedOnSpacing = (baseSizePx: number) => {
+    const newSizes: Size[] = [];
+    sizes.forEach((size, i) => {
+      const sizePx = baseSizePx + i * 6; 
+      newSizes.push({
+        ...size,
+        sizePx: `${sizePx}px`, 
+      });
+    });
+    return newSizes;
+  };
+
   const setSpacing = (value: string) => {
+    const baseSizePx = parseInt(value);
+    const newSizes = updateSizesBasedOnSpacing(baseSizePx);
     setSpacingState(value);
+    setSizesState(newSizes);
   };
 
   const setVariantCount = (value: number) => {

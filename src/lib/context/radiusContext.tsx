@@ -44,10 +44,10 @@ export const RadiusProvider: React.FC<PropsWithChildren<{}>> = ({
   const updateSizesBasedOnSpacing = (baseSizePx: number) => {
     const newSizes: Size[] = [];
     sizes.forEach((size, i) => {
-      const sizePx = baseSizePx + i * 6; // Increment by 6
+      const sizePx = baseSizePx + i * 6; 
       newSizes.push({
         ...size,
-        sizePx: `${sizePx}px`, // Update sizePx only
+        sizePx: `${sizePx}px`, 
       });
     });
     return newSizes;

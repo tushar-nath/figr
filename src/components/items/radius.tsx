@@ -120,7 +120,7 @@ export const RadiusComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Input
-                      value={size.sizePx} // Use value prop instead of defaultValue
+                      value={size.sizePx} 
                       onChange={(e) =>
                         handleSizeChange(index, "sizePx", e.target.value)
                       }
