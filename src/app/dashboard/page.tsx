@@ -6,6 +6,7 @@ import { Menu } from "@/components/menu/menu";
 import { ColorComponent } from "@/components/items/color";
 import { SpacingComponent } from "@/components/items/spacing";
 import { RadiusComponent } from "@/components/items/radius";
+import { Components } from "@/components/items/components";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<string>("color");
@@ -18,6 +19,8 @@ export default function Home() {
         return <SpacingComponent />;
       case "radius":
         return <RadiusComponent />;
+      case "components":
+        return <Components />;
       default:
         return null;
     }

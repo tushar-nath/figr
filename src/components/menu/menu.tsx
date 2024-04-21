@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 
 interface MenuItemProps {
@@ -7,6 +5,8 @@ interface MenuItemProps {
   isSelected: boolean;
   onClick: () => void;
   setSelectedItem: React.Dispatch<React.SetStateAction<string>>;
+  isFirstItem: boolean;
+  isLastItem: boolean;
 }
 
 interface MenuProps {
@@ -15,6 +15,7 @@ interface MenuProps {
 
 export const Menu: React.FC<MenuProps> = ({ setSelectedItem }) => {
   const [selectedItem, setSelectedItemLocal] = useState<string>("color");
+  const menuItems = ["Color", "Spacing", "Radius", "Components"];
 
   const handleItemClick = (item: string) => {
     setSelectedItemLocal(item);
@@ -24,36 +25,17 @@ export const Menu: React.FC<MenuProps> = ({ setSelectedItem }) => {
   return (
     <div className="h-10 flex w-[640px] mt-6 justify-around items-center mx-auto gap-6">
       <div className="flex items-center">
-        <MenuItem
-          title="Color"
-          isSelected={selectedItem === "color"}
-          onClick={() => handleItemClick("color")}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuItem
-          title="Spacing"
-          isSelected={selectedItem === "spacing"}
-          onClick={() => handleItemClick("spacing")}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuItem
-          title="Radius"
-          isSelected={selectedItem === "radius"}
-          onClick={() => handleItemClick("radius")}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuItem
-          title="Shadow"
-          isSelected={selectedItem === "shadow"}
-          onClick={() => handleItemClick("shadow")}
-          setSelectedItem={setSelectedItem}
-        />
-        <MenuItem
-          title="Components"
-          isSelected={selectedItem === "components"}
-          onClick={() => handleItemClick("components")}
-          setSelectedItem={setSelectedItem}
-        />
+        {menuItems.map((item, index) => (
+          <MenuItem
+            key={item}
+            title={item}
+            isSelected={selectedItem.toLowerCase() === item.toLowerCase()}
+            onClick={() => handleItemClick(item.toLowerCase())}
+            setSelectedItem={setSelectedItem}
+            isFirstItem={index === 0}
+            isLastItem={index === menuItems.length - 1}
+          />
+        ))}
       </div>
     </div>
   );
@@ -64,12 +46,24 @@ const MenuItem: React.FC<MenuItemProps> = ({
   isSelected,
   onClick,
   setSelectedItem,
+  isFirstItem,
+  isLastItem,
 }) => {
+  let className = "px-4 py-2 text-center border cursor-pointer";
+
+  if (isSelected) {
+    className += " bg-gray-200";
+  }
+  if (isFirstItem) {
+    className += " rounded-tl-lg rounded-bl-lg";
+  }
+  if (isLastItem) {
+    className += " rounded-tr-lg rounded-br-lg";
+  }
+
   return (
     <div
-      className={`px-4 py-2 w-32 text-center border cursor-pointer ${
-        isSelected ? "bg-gray-200" : ""
-      }`}
+      className={className}
       onClick={() => {
         onClick();
         setSelectedItem(title.toLowerCase());
