@@ -9,12 +9,11 @@ import { RadiusComponent } from "@/components/items/radius";
 import { Components } from "@/components/items/components";
 import { motion } from "framer-motion";
 import { useCommonContext } from "@/lib/context/commonContext";
+import { BeatLoader } from "react-spinners";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<string>("color");
   const { isLoading } = useCommonContext();
-
-  console.log("is loading", isLoading);
 
   const renderSelectedComponent = () => {
     switch (selectedItem) {
@@ -47,9 +46,17 @@ export default function Home() {
           ease: "easeInOut",
         }}
       >
-        <Header />
-        <Menu setSelectedItem={setSelectedItem} />
-        {renderSelectedComponent()}
+        {isLoading ? (
+          <div className="h-screen flex flex-col justify-center items-center">
+            <BeatLoader color="black" size={20} />
+          </div>
+        ) : (
+          <>
+            <Header />
+            <Menu setSelectedItem={setSelectedItem} />
+            {renderSelectedComponent()}
+          </>
+        )}
       </motion.div>
     </main>
   );

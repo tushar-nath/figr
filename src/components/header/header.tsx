@@ -31,10 +31,6 @@ const handleLogout = async () => {
 export const Header = () => {
   const { session } = useCommonContext();
 
-  console.log("session is hahahahahhaha", session);
-
-  console.log("email", session.email);
-
   return (
     <div>
       <div className="flex pb-6">
