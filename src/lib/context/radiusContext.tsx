@@ -44,10 +44,10 @@ export const RadiusProvider: React.FC<PropsWithChildren<{}>> = ({
   const updateSizesBasedOnSpacing = (baseSizePx: number) => {
     const newSizes: Size[] = [];
     sizes.forEach((size, i) => {
-      const sizePx = baseSizePx + i * 6; 
+      const sizePx = baseSizePx + i * 6;
       newSizes.push({
         ...size,
-        sizePx: `${sizePx}px`, 
+        sizePx: `${sizePx}px`,
       });
     });
     return newSizes;
@@ -62,6 +62,22 @@ export const RadiusProvider: React.FC<PropsWithChildren<{}>> = ({
 
   const setVariantCount = (value: number) => {
     setVariantCountState(value);
+
+    if (value > sizes.length) {
+      const newSizes = [...sizes];
+      for (let i = sizes.length + 1; i <= value; i++) {
+        const sizeName = `${i}xl`;
+        newSizes.push({
+          sizeName: sizeName,
+          sizePx: "",
+          isDeleted: false,
+        });
+      }
+      setSizesState(newSizes);
+    } else if (value < sizes.length) {
+      const newSizes = sizes.slice(0, value);
+      setSizesState(newSizes);
+    }
   };
 
   const setSizes = (value: Size[]) => {

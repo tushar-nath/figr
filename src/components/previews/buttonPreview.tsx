@@ -5,10 +5,13 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useColorContext } from "@/lib/context/colorContext";
 import { useSpaceContext } from "@/lib/context/spaceContext";
+import { useRadiusContext } from "@/lib/context/radiusContext";
 
 const ButtonsPreview = () => {
   const { hexCodes } = useColorContext();
-  const { sizes } = useSpaceContext();
+  const { sizes: spaceSizes } = useSpaceContext();
+  const { sizes: radiusSizes } = useRadiusContext();
+  const borderRadius = radiusSizes[2].sizePx;
 
   const buttonConfigs = [
     {
@@ -44,9 +47,9 @@ const ButtonsPreview = () => {
   ];
 
   const paddingSizes: PaddingSizes = {
-    sm: sizes.find((size) => size.sizeName === "sm")?.sizeRem,
-    md: sizes.find((size) => size.sizeName === "md")?.sizeRem,
-    lg: sizes.find((size) => size.sizeName === "lg")?.sizeRem,
+    sm: spaceSizes.find((size) => size.sizeName === "sm")?.sizeRem,
+    md: spaceSizes.find((size) => size.sizeName === "md")?.sizeRem,
+    lg: spaceSizes.find((size) => size.sizeName === "lg")?.sizeRem,
   };
 
   return (
@@ -64,6 +67,7 @@ const ButtonsPreview = () => {
                     width: "160px",
                     padding:
                       paddingSizes[size.toLowerCase() as keyof PaddingSizes],
+                    borderRadius: borderRadius,
                   }}
                 >
                   Button

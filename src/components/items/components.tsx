@@ -27,7 +27,7 @@ export const Components = () => {
     } else if (view === "select") {
       return <SelectPreview />;
     }
-    return null; // Default case in case an unexpected value is set
+    return null;
   };
 
   return (
