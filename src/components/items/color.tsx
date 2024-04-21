@@ -14,9 +14,9 @@ import { useColorContext } from "@/lib/context/colorContext";
 import { ChromePicker } from "react-color";
 
 export const ColorComponent = () => {
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const [selectedHexCode, setSelectedHexCode] = useState("");
-  const [currentColorIndex, setCurrentColorIndex] = useState<number | null>(null);
+  const [showColorPicker, setShowColorPicker] = useState(true);
+  const [selectedHexCode, setSelectedHexCode] = useState("#FF5733");
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
 
   const accordionData: AccordionItemData[] = [
     {
@@ -61,13 +61,13 @@ export const ColorComponent = () => {
   } = useColorContext();
 
   const handleAccordionItemClick = (index: number) => {
-    setSelectedHexCode(hexCodes[index]); 
-    setCurrentColorIndex(index);  // Set the current index
+    setSelectedHexCode(hexCodes[index]);
+    setCurrentColorIndex(index); // Set the current index
     setShowColorPicker(true);
   };
 
   const handleColorPickerChange = (color: any) => {
-    setSelectedHexCode(color.hex); 
+    setSelectedHexCode(color.hex);
     if (currentColorIndex !== null) {
       handleHexCodeChange(currentColorIndex, color.hex);
     }
