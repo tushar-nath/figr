@@ -8,9 +8,13 @@ import { SpacingComponent } from "@/components/items/spacing";
 import { RadiusComponent } from "@/components/items/radius";
 import { Components } from "@/components/items/components";
 import { motion } from "framer-motion";
+import { useCommonContext } from "@/lib/context/commonContext";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<string>("color");
+  const { isLoading } = useCommonContext();
+
+  console.log("is loading", isLoading);
 
   const renderSelectedComponent = () => {
     switch (selectedItem) {

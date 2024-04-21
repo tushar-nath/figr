@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { AlertCircleIcon, EyeIcon, EyeOff, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ function LoginForm() {
     email: "",
     password: "",
   });
+
   const handleSignup = async () => {
     try {
       await signUp(userData.email, userData.password, userData.name);

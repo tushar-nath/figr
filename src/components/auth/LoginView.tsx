@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -132,7 +134,7 @@ const LoginView = () => {
               </Button>
             </CardFooter>
             <CardDescription className="px-6 py-4">
-              <h3>Don't have an account?</h3>
+              Don&apos;t have an account?
             </CardDescription>
             <CardFooter>
               <Link className="w-full" href="/signup" passHref>

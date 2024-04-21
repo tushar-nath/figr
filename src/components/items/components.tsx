@@ -37,7 +37,7 @@ export const Components = () => {
         <h3
           onClick={() => handleClick("button")}
           className={`text-md font-normal my-5 cursor-pointer ${
-            view === "button" ? "text-blue-400" : ""
+            view === "button" ? "text-blue-500" : ""
           }`}
         >
           Button

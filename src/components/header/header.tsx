@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { logout } from "@/lib/actions";
+import { useCommonContext } from "@/lib/context/commonContext";
 
 const handleLogout = async () => {
   try {
@@ -28,6 +29,12 @@ const handleLogout = async () => {
 };
 
 export const Header = () => {
+  const { session } = useCommonContext();
+
+  console.log("session is hahahahahhaha", session);
+
+  console.log("email", session.email);
+
   return (
     <div>
       <div className="flex pb-6">
@@ -57,7 +64,7 @@ export const Header = () => {
               <DialogHeader>
                 <DialogTitle>Edit profile</DialogTitle>
                 <DialogDescription>
-                  Make changes to your profile here. Click save when you're
+                  Make changes to your profile here. Click save when you&apos;re
                   done.
                 </DialogDescription>
               </DialogHeader>
@@ -68,17 +75,17 @@ export const Header = () => {
                   </Label>
                   <Input
                     id="name"
-                    defaultValue="Pedro Duarte"
+                    defaultValue={session.name}
                     className="col-span-3"
                   />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="username" className="text-right">
-                    Username
+                    Email
                   </Label>
                   <Input
                     id="username"
-                    defaultValue="@peduarte"
+                    defaultValue={session.email}
                     className="col-span-3"
                   />
                 </div>
