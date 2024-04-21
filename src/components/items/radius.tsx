@@ -1,20 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Select } from "antd";
 import { useRadiusContext } from "@/lib/context/radiusContext";
 import { VariantCount } from "./variantCount";
-import MultiplierCount from "./multiplierCount";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table";
-  import { Input } from "../ui/input";
-  import { Trash2 } from "lucide-react";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "../ui/input";
+import { Trash2 } from "lucide-react";
 
 const { Option } = Select;
 
@@ -24,8 +23,9 @@ export const RadiusComponent = () => {
     setSpacing,
     variantCount,
     setVariantCount,
-    multiplier,
-    setMultiplier,
+    sizes,
+    setSizes,
+    deleteSize,
   } = useRadiusContext();
 
   const handleSpacingChange = (value: any) => {
@@ -36,9 +36,40 @@ export const RadiusComponent = () => {
     setVariantCount(value);
   };
 
-  const handleMultiplierChange = (value: number) => {
-    setMultiplier(value);
+  const handleSizeChange = (index: number, field: string, value: string) => {
+    let newValues: any = [...sizes];
+    if (!newValues[index])
+      newValues[index] = { sizeName: "", sizePx: "", isDeleted: false };
+
+    if (field === "sizeName") {
+      newValues[index][field] = value;
+    } else if (field === "sizePx") {
+      const baseSizePx = parseInt(spacing);
+      const newSizePx = baseSizePx + index * 6;
+      newValues[index] = {
+        ...newValues[index],
+        sizePx: `${newSizePx}px`,
+      };
+    }
+
+    setSizes(newValues);
   };
+
+  useEffect(() => {
+    const baseSizePx = parseInt(spacing);
+    const newSizes = sizes.map((size, index) => {
+      const newSizePx = baseSizePx + index * 6;
+      return {
+        ...size,
+        sizePx: `${newSizePx}px`,
+      };
+    });
+    setSizes(newSizes);
+  }, [spacing, setSizes]);
+
+  const options = [0, 2, 4, 6, 8, 12, 16, 20, 24, 32].map((value) => (
+    <Option key={value} value={`${value}px`}>{`${value}px`}</Option>
+  ));
 
   return (
     <div className="flex h-[800px] mt-10 w-full">
@@ -54,9 +85,7 @@ export const RadiusComponent = () => {
             onChange={handleSpacingChange}
             style={{ width: "100%" }}
           >
-            <Option value="6px">6px</Option>
-            <Option value="8px">8px</Option>
-            <Option value="12px">12px</Option>
+            {options}
           </Select>
         </div>
 
@@ -66,17 +95,10 @@ export const RadiusComponent = () => {
           defaultValue={variantCount}
           onChange={handleVariantCountChange}
         />
-
-        <h1 className="mt-10 mb-4 font-medium">Multiplier Count:</h1>
-        <MultiplierCount
-          id="multiplierCount"
-          defaultValue={multiplier}
-          onChange={handleMultiplierChange}
-        />
       </div>
       <div className="h-[800px] w-2/3 border rounded-[25px] overflow-y-auto">
         <div className="py-10 px-6">
-        {/* <Table>
+          <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-1/3">Variable Name</TableHead>
@@ -98,15 +120,13 @@ export const RadiusComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Input
-                      defaultValue={size.sizePx}
+                      value={size.sizePx} // Use value prop instead of defaultValue
                       onChange={(e) =>
                         handleSizeChange(index, "sizePx", e.target.value)
                       }
                     />
                   </TableCell>
-                  <TableCell>
-                    <Input disabled value={size.sizeRem} />
-                  </TableCell>
+                  <TableCell></TableCell>
                   <TableCell className="text-right">
                     <Trash2
                       onClick={() => deleteSize(index)}
@@ -118,7 +138,7 @@ export const RadiusComponent = () => {
                 </TableRow>
               ))}
             </TableBody>
-          </Table> */}
+          </Table>
         </div>
       </div>
     </div>

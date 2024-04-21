@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
 import { Suspense, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { signUp } from "@/lib/actions";
 import { motion } from "framer-motion";
 

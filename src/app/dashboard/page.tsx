@@ -7,6 +7,7 @@ import { ColorComponent } from "@/components/items/color";
 import { SpacingComponent } from "@/components/items/spacing";
 import { RadiusComponent } from "@/components/items/radius";
 import { Components } from "@/components/items/components";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<string>("color");
@@ -28,9 +29,24 @@ export default function Home() {
 
   return (
     <main className="min-h-screen justify-between p-12">
-      <Header />
-      <Menu setSelectedItem={setSelectedItem} />
-      {renderSelectedComponent()}
+      <motion.div
+        initial={{
+          y: "15%",
+          opacity: 0,
+        }}
+        animate={{
+          y: "0%",
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+        }}
+      >
+        <Header />
+        <Menu setSelectedItem={setSelectedItem} />
+        {renderSelectedComponent()}
+      </motion.div>
     </main>
   );
 }
