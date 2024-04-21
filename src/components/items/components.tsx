@@ -5,6 +5,7 @@ import { Separator } from "../ui/separator";
 import ButtonsPreview from "../previews/buttonPreview";
 import { TextPreview } from "../previews/textPreview";
 import { RadioPreview } from "../previews/radioPreview";
+import { CheckboxPreview } from "../previews/checkbox";
 
 export const Components = () => {
   const [view, setView] = useState("button");
@@ -21,7 +22,7 @@ export const Components = () => {
     } else if (view === "radio") {
       return <RadioPreview />;
     } else if (view === "checkbox") {
-      return <div>Checkbox Component Preview</div>;
+      return <CheckboxPreview />;
     } else if (view === "select") {
       return <div>Select Component Preview</div>;
     }
