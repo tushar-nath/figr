@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import {
   Accordion,
@@ -17,8 +15,9 @@ export const ColorComponent = () => {
   const [showColorPicker, setShowColorPicker] = useState(true);
   const [selectedHexCode, setSelectedHexCode] = useState("#FF5733");
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
+  const [backgroundColor, setBackgroundColor] = useState("#FF5733");
 
-  const accordionData: AccordionItemData[] = [
+  const accordionData = [
     {
       trigger: "Primary",
       variableName: "PrimaryVariable",
@@ -62,12 +61,13 @@ export const ColorComponent = () => {
 
   const handleAccordionItemClick = (index: number) => {
     setSelectedHexCode(hexCodes[index]);
-    setCurrentColorIndex(index); // Set the current index
+    setCurrentColorIndex(index);
     setShowColorPicker(true);
   };
 
   const handleColorPickerChange = (color: any) => {
     setSelectedHexCode(color.hex);
+    setBackgroundColor(color.hex);
     if (currentColorIndex !== null) {
       handleHexCodeChange(currentColorIndex, color.hex);
     }
@@ -115,9 +115,7 @@ export const ColorComponent = () => {
                   <VariantCount
                     id={`variantCount-${index}`}
                     defaultValue={variantCounts[index]}
-                    onChange={(value: any) =>
-                      handleVariantCountChange(index, value)
-                    }
+                    onChange={(value) => handleVariantCountChange(index, value)}
                   />
                 </div>
               </AccordionContent>
@@ -125,13 +123,26 @@ export const ColorComponent = () => {
           ))}
         </Accordion>
       </div>
-      <div className="h-[800px] w-2/3 border rounded-[25px]">
+      <div className="h-[800px] w-2/3 border rounded-[25px] px-10 py-6">
         {showColorPicker && (
-          <div className="flex justify-center items-center h-full">
-            <ChromePicker
-              color={selectedHexCode}
-              onChange={handleColorPickerChange}
-            />
+          <div>
+            <div className="mb-5 text-lg font-semibold">
+              {accordionData[currentColorIndex].trigger}
+            </div>
+            <div
+              className="h-96 w-full mb-10 relative border rounded-[25px]"
+              style={{ backgroundColor: backgroundColor }}
+            >
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">
+                {selectedHexCode}
+              </div>
+            </div>
+            <div className="flex justify-center items-center h-full">
+              <ChromePicker
+                color={selectedHexCode}
+                onChange={handleColorPickerChange}
+              />
+            </div>
           </div>
         )}
       </div>
