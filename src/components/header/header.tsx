@@ -32,8 +32,11 @@ export const Header = () => {
     <div>
       <div className="flex pb-6">
         <div>
-          <h1 className="text-4xl font-medium">identity.</h1>
+          <h1 className="text-4xl font-medium">
+            identity<span className="text-blue-500">.</span>
+          </h1>
         </div>
+
         <div className="ml-auto gap-3 flex">
           <Button variant="outline" className="mr-8">
             Save Project
@@ -45,6 +48,7 @@ export const Header = () => {
                 <AvatarImage
                   src="https://github.com/shadcn.png"
                   alt="@shadcn"
+                  className="cursor-pointer"
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
