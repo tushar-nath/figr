@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Separator } from "../ui/separator";
 import ButtonsPreview from "../previews/buttonPreview";
+import { TextPreview } from "../previews/textPreview";
 
 export const Components = () => {
   const [view, setView] = useState("button");
@@ -15,7 +16,7 @@ export const Components = () => {
     if (view === "button") {
       return <ButtonsPreview />;
     } else if (view === "text") {
-      return <div>Text Component Preview</div>;
+      return <TextPreview />;
     } else if (view === "radio") {
       return <div>Radio Component Preview</div>;
     } else if (view === "checkbox") {
@@ -45,7 +46,7 @@ export const Components = () => {
             view === "text" ? "text-blue-400" : ""
           }`}
         >
-          Text
+          Text Area
         </h3>
         <Separator />
         <h3

@@ -9,3 +9,7 @@ type PaddingSizes = {
   md: string | undefined;
   lg: string | undefined;
 };
+
+type FocusState = {
+  [key: string]: boolean;
+};
