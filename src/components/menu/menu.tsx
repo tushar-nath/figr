@@ -52,13 +52,13 @@ const MenuItem: React.FC<MenuItemProps> = ({
   let className = "px-4 py-2 text-center border cursor-pointer";
 
   if (isSelected) {
-    className += " bg-gray-200";
+    className += " bg-gray-100";
   }
   if (isFirstItem) {
-    className += " rounded-tl-lg rounded-bl-lg";
+    className += " rounded-tl-2xl rounded-bl-2xl";
   }
   if (isLastItem) {
-    className += " rounded-tr-lg rounded-br-lg";
+    className += " rounded-tr-2xl rounded-br-2xl";
   }
 
   return (
