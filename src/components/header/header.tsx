@@ -18,6 +18,11 @@ import { Separator } from "@/components/ui/separator";
 import { logout } from "@/lib/actions";
 import { useCommonContext } from "@/lib/context/commonContext";
 import { BeatLoader } from "react-spinners";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 export const Header = () => {
   const { session } = useCommonContext();
@@ -84,10 +89,24 @@ export const Header = () => {
         </div>
 
         <div className="ml-auto gap-3 flex">
-          <Button variant="outline" className="mr-8">
-            Save Project
-          </Button>
-          <Button className="mr-8">Generate</Button>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="outline" className="mr-8">
+                Save Project
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-62 text-blue-500">
+              Coming Soon!
+            </HoverCardContent>
+          </HoverCard>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button className="mr-8">Generate</Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-62 text-blue-500">
+              Coming Soon!
+            </HoverCardContent>
+          </HoverCard>
           <Dialog>
             <DialogTrigger asChild>
               <Avatar>
