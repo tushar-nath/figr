@@ -24,25 +24,27 @@ const LoginView = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingSignIn, setLoadingSignIn] = useState<boolean>(false);
+  const [loadingCreateAccount, setLoadingCreateAccount] =
+    useState<boolean>(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      setLoading(true);
+      setLoadingSignIn(true);
       await authenticate(email, password);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }
+    } finally {
+      setLoadingSignIn(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col w-screen h-screen gap-3 justify-center items-center bg-neutral-950">
+      <div className="flex flex-col w-screen h-screen gap-3 justify-center items-center">
         <motion.div
           initial={{
             y: "15%",
@@ -101,13 +103,17 @@ const LoginView = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="w-full group" type="submit" disabled={loading}>
-                {loading ? (
+              <Button
+                className="w-full group"
+                type="submit"
+                disabled={loadingSignIn}
+              >
+                {loadingSignIn ? (
                   <BeatLoader
                     color="white"
                     size={8}
                     aria-label="Loading Spinner"
-                    data-testid="loader"
+                    data-testid="loader-signin"
                   />
                 ) : (
                   <>
@@ -141,14 +147,14 @@ const LoginView = () => {
                 <Button
                   className="w-full group"
                   type="submit"
-                  disabled={loading}
+                  disabled={loadingCreateAccount}
                 >
-                  {loading ? (
+                  {loadingCreateAccount ? (
                     <BeatLoader
                       color="white"
                       size={8}
                       aria-label="Loading Spinner"
-                      data-testid="loader"
+                      data-testid="loader-createaccount"
                     />
                   ) : (
                     <>

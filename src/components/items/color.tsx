@@ -125,23 +125,27 @@ export const ColorComponent = () => {
       </div>
       <div className="h-[800px] w-2/3 border rounded-[25px] px-10 py-6">
         {showColorPicker && (
-          <div>
-            <div className="mb-5 text-lg font-semibold">
-              {accordionData[currentColorIndex].trigger}
-            </div>
-            <div
-              className="h-96 w-full mb-10 relative border rounded-[25px]"
-              style={{ backgroundColor: backgroundColor }}
-            >
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">
-                {selectedHexCode}
+          <div className="flex">
+            <div style={{ flex: 1 }}>
+              <div className="mb-5 text-lg font-semibold">
+                {accordionData[currentColorIndex].trigger}
+              </div>
+              <div
+                className="h-96 w-full mb-10 relative border rounded-[25px]"
+                style={{ backgroundColor: backgroundColor }}
+              >
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">
+                  {selectedHexCode}
+                </div>
               </div>
             </div>
-            <div className="flex justify-center items-center h-full">
-              <ChromePicker
-                color={selectedHexCode}
-                onChange={handleColorPickerChange}
-              />
+            <div style={{ flex: 1 }}>
+              <div className="flex justify-center items-center h-full">
+                <ChromePicker
+                  color={selectedHexCode}
+                  onChange={handleColorPickerChange}
+                />
+              </div>
             </div>
           </div>
         )}
