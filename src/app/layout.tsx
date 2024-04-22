@@ -1,11 +1,12 @@
 "use client";
 
 import { Inter } from "next/font/google";
+import CommonProvider from "@/lib/context/commonContext";
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { ColorProvider } from "@/lib/context/colorContext";
 import { SpaceProvider } from "@/lib/context/spaceContext";
 import { RadiusProvider } from "@/lib/context/radiusContext";
-import CommonProvider from "@/lib/context/commonContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
             </SpaceProvider>
           </ColorProvider>
         </CommonProvider>
+        <Toaster />
       </body>
     </html>
   );

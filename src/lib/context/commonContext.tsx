@@ -39,15 +39,13 @@ const CommonProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     getSession()
       .then(async (session) => {
-        if (session) {
-          const user = await API.getUser(session?.user?.email as string);
-          console.log(session, user, "in context");
-          setSession({
-            email: session?.user?.email as string,
-            name: user.name,
-          });
-          setIsLoading(false);
-        }
+        const user = await API.getUser(session?.user?.email as string);
+        console.log(session, user, "in context");
+        setSession({
+          email: session?.user?.email as string,
+          name: user.name,
+        });
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error, "error in context");
