@@ -103,7 +103,6 @@ export const RadiusComponent = () => {
               <TableRow>
                 <TableHead className="w-1/3">Variable Name</TableHead>
                 <TableHead className="w-1/3">Size (px)</TableHead>
-                <TableHead className="w-1/3">Size (rem)</TableHead>
                 <TableHead className="w-1/3 text-right"></TableHead>
               </TableRow>
             </TableHeader>
