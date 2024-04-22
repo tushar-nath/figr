@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "../ui/button";
 import { useColorContext } from "@/lib/context/colorContext";
+import { FocusState } from "@/lib/types";
 
 export const TextPreview = () => {
   const { hexCodes } = useColorContext();
