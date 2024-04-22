@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -63,6 +65,7 @@ export const ColorComponent = () => {
     setSelectedHexCode(hexCodes[index]);
     setCurrentColorIndex(index);
     setShowColorPicker(true);
+    setBackgroundColor(hexCodes[index]);
   };
 
   const handleColorPickerChange = (color: any) => {
