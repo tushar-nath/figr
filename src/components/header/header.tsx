@@ -36,11 +36,42 @@ export const Header = () => {
     }
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     setSavingChanges(true);
-    setTimeout(() => {
+
+    try {
+      const nameInput = document.getElementById("name") as HTMLInputElement;
+      const usernameInput = document.getElementById(
+        "username"
+      ) as HTMLInputElement;
+
+      const newName = nameInput?.value || "";
+      const newEmail = usernameInput?.value || "";
+      const currentEmail = session.email;
+
+      const response = await fetch("/api/user", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: currentEmail,
+          newEmail,
+          newName,
+        }),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        console.log("Updated user:", updatedUser);
+      } else {
+        console.error("Error updating user:", response.status);
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+    } finally {
       setSavingChanges(false);
-    }, 2000);
+    }
   };
 
   return (
