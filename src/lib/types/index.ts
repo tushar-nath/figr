@@ -10,18 +10,18 @@ export type GenericError = {
   message: string;
 };
 
-interface AccordionItemData {
+export interface AccordionItemData {
   trigger: string;
   variableName: string;
   hexCode: string;
 }
 
-type PaddingSizes = {
+export type PaddingSizes = {
   sm: string | undefined;
   md: string | undefined;
   lg: string | undefined;
 };
 
-type FocusState = {
+export type FocusState = {
   [key: string]: boolean;
 };

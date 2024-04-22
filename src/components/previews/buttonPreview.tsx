@@ -6,6 +6,7 @@ import { Separator } from "../ui/separator";
 import { useColorContext } from "@/lib/context/colorContext";
 import { useSpaceContext } from "@/lib/context/spaceContext";
 import { useRadiusContext } from "@/lib/context/radiusContext";
+import { PaddingSizes } from "@/lib/types";
 
 const ButtonsPreview = () => {
   const { hexCodes } = useColorContext();
