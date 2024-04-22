@@ -16,6 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
 import { Suspense, useState } from "react";
 import { signUp } from "@/lib/actions";
 import { motion } from "framer-motion";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -29,12 +30,16 @@ function LoginForm() {
     email: "",
     password: "",
   });
+  const [creatingAccount, setCreatingAccount] = useState(false);
 
   const handleSignup = async () => {
     try {
+      setCreatingAccount(true);
       await signUp(userData.email, userData.password, userData.name);
     } catch (error) {
       setErrorMessage(error as string);
+    } finally {
+      setCreatingAccount(false);
     }
   };
 
@@ -119,8 +124,13 @@ function LoginForm() {
                 onClick={() => {
                   handleSignup();
                 }}
+                disabled={creatingAccount}
               >
-                Create an account
+                {creatingAccount ? (
+                  <BeatLoader size={8} color="#ffffff" />
+                ) : (
+                  "Create an account"
+                )}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
@@ -146,7 +156,6 @@ function LoginForm() {
     </div>
   );
 }
-
 export default function Signup() {
   return (
     <Suspense>

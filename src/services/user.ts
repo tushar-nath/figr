@@ -34,4 +34,34 @@ export class UserService {
 
     return createdUser;
   }
+
+  async updateUser(
+    currentEmail: string,
+    newEmail: string | undefined,
+    newName: string | undefined
+  ) {
+    if (!this.isInit) {
+      throw Error(this.notInitError);
+    }
+
+    const user = await this.user.findOne({ email: currentEmail });
+    if (!user) {
+      throw Error("User not found");
+    }
+
+    if (newEmail && newEmail !== currentEmail) {
+      const existingEmailUser = await this.user.findOne({ email: newEmail });
+      if (existingEmailUser) {
+        throw Error(this.userExistsError);
+      }
+      user.email = newEmail;
+    }
+
+    if (newName) {
+      user.name = newName;
+    }
+
+    await user.save();
+    return user;
+  }
 }
