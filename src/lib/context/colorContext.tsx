@@ -6,6 +6,7 @@ import React, {
   useContext,
   useState,
 } from "react";
+import { AccordionItemData } from "../types";
 
 interface ColorContextType {
   variableNames: string[];
