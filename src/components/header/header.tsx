@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,18 +17,31 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { logout } from "@/lib/actions";
 import { useCommonContext } from "@/lib/context/commonContext";
-
-const handleLogout = async () => {
-  try {
-    console.info("Invoking handleLogout from client.");
-    await logout();
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { BeatLoader } from "react-spinners";
 
 export const Header = () => {
   const { session } = useCommonContext();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [savingChanges, setSavingChanges] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      setLoggingOut(true);
+      console.info("Invoking handleLogout from client.");
+      await logout();
+      setLoggingOut(false);
+    } catch (error) {
+      console.log(error);
+      setLoggingOut(false);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    setSavingChanges(true);
+    setTimeout(() => {
+      setSavingChanges(false);
+    }, 2000);
+  };
 
   return (
     <div>
@@ -85,10 +99,28 @@ export const Header = () => {
                 </div>
               </div>
               <DialogFooter>
-                <Button variant="outline" onClick={handleLogout}>
-                  Logout
+                <Button
+                  variant="outline"
+                  onClick={handleLogout}
+                  disabled={loggingOut}
+                >
+                  {loggingOut ? (
+                    <BeatLoader size={8} color="#000000" />
+                  ) : (
+                    "Logout"
+                  )}
                 </Button>
-                <Button type="submit">Save changes</Button>
+                <Button
+                  type="submit"
+                  onClick={handleSaveChanges}
+                  disabled={savingChanges}
+                >
+                  {savingChanges ? (
+                    <BeatLoader size={8} color="#ffffff" />
+                  ) : (
+                    "Save changes"
+                  )}
+                </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
