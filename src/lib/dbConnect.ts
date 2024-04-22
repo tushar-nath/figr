@@ -1,5 +1,5 @@
 /*
-In the event that we're looking to migrate from one DB provider to another, let's keep the logic for that 
+In the event that we are looking to migrate from one DB provider to another, lets keep the logic for that 
 provider tightly coupled in one area and have the file names kept agnostic. 
 
 This will allow us to avoid future renames & remind us not to be dependent on any one party.
