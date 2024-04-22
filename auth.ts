@@ -36,7 +36,7 @@ export const { auth, signIn, signOut } = NextAuth({
           if (user) {
             const passwordsMatch = await bcrypt.compare(
               password,
-              user.password
+              user.password,
             );
             if (passwordsMatch) {
               returnValue = user; // Update return value if credentials are valid

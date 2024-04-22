@@ -1,5 +1,5 @@
 import { User } from "@/lib/types";
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const userSchema: Schema = new Schema<User>(
   {

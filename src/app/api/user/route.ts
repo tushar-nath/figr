@@ -7,7 +7,6 @@ export async function GET(req: Request) {
     const userService = new UserService();
     await userService.init();
     const user = await userService.getUser(email);
-    console.log("user in server: ", user);
     return Response.json(user);
   } catch (error) {
     return new Response("Intenal server error", {

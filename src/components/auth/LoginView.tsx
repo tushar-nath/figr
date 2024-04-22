@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { AlertCircleIcon, EyeIcon, EyeOff, Terminal } from "lucide-react";
+import { AlertCircleIcon, EyeIcon, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { authenticate } from "@/lib/actions";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";

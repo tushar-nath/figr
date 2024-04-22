@@ -19,9 +19,7 @@ import { useCommonContext } from "@/lib/context/commonContext";
 
 const handleLogout = async () => {
   try {
-    console.info(
-      "Invoking handleLogout from client. (src/app/Dashboard/page.tsx"
-    );
+    console.info("Invoking handleLogout from client.");
     await logout();
   } catch (error) {
     console.log(error);
