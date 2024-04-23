@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen justify-between p-12">
+    <main className="min-h-screen justify-between p-10">
       <motion.div
         initial={{
           y: "15%",
